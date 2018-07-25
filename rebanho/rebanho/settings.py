@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-
+from decouple import config, Csv
+# from dj_database_url import parse as dburl
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -20,12 +21,20 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 've=gli%pi@)@lbot&_g94ddgyye3)a&lwwamoa6xz5!w4oinfg'
+
+SECRET_KEY = config('SECRET_KEY')
+# SECRET_KEY = 've=gli%pi@)@lbot&_g94ddgyye3)a&lwwamoa6xz5!w4oinfg'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ADMINS = (
+    ('Admin Smart Is Cool', 'falmeidamelo@uol.com.br'),
+)
+
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=[], cast=Csv())
+
+DEFAULT_FROM_EMAIL = u'contato@rebanho.com'
 
 
 # Application definition
@@ -37,6 +46,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrap3',
+    'localbr',
+    'municipios',
 ]
 
 MIDDLEWARE = [
@@ -69,7 +81,22 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'rebanho.wsgi.application'
 
+# ######### CUSTOM USER CONFIGURATION
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
+# AUTH_USER_MODEL = 'core.User'
+# ######### END CUSTOM USER CONFIGURATION
 
+# ######### CUSTOM LOGIN URL CONFIGURATION
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#login-url
+LOGIN_URL = '/login/'
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
+LOGIN_REDIRECT_URL = '/'
+# ######### END CUSTOM LOGIN URL CONFIGURATION
+# LOGOUT_REDIRECT_URL = '/'
+# Database
+# https://docs.djangoproject.com/en/1.9/ref/settings/#databases
+
+#  ######### DATABASE CONFIGURATION
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
@@ -103,9 +130,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
@@ -118,3 +145,34 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL= '/media/'
+
+if DEBUG is False:
+    INSTALLED_APPS += ('storages',)
+    DEFAULT_FILE_STORAGE = config('DEFAULT_FILE_STORAGE')  # media file
+    AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+    STATICFILES_STORAGE = config('STATICFILES_STORAGE')  # css, js
+    # ##
+    AWS_S3_CUSTON_DOMAIN = "d12ngo9oha73hw.cloudfront.net"  # CDN
+    STATIC_URL = "//%s/staticfile/"  % AWS_S3_CUSTON_DOMAIN
+    MEDIA_URL= "//%s/media/"  % AWS_S3_CUSTON_DOMAIN
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfile')
+# Ex  Local: /home/fabiano/projetos/escolar/escolar/staticfile
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# Ex Local: /home/fabiano/projetos/escolar/escolar/media
+
+# Email configuration
+EMAIL_BACKEND = config('EMAIL_BACKEND')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT', cast=int)
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+
+# ######### DEFINE CHILDCRUD UI
+CHILDCRUD_UI = 'bootstrap'
+# ######### END CHILDCRUD UI
