@@ -2,16 +2,16 @@
 # ### http://tecadmin.net/install-python-3-5-on-ubuntu/#
 # ## sudo apt-get install python3.5-dev
 
+-e git://github.com/FabianoAlmeidaMelo/django-localbr.git@6aebd61b59e4ab419dae8ee6c4558f32c1a5d24c#egg=django_localbr
+-e git://github.com/znc-sistemas/django-municipios.git@024d7af7642edf281ba44f5bb4e61de344d0deb9#egg=django_municipios
+Django==1.11.12
+Pillow==3.4.2
 certifi==2018.4.16
 chardet==3.0.4
 dj-static==0.0.6
-Django==1.11.12
 django-bootstrap3==9.0.0
--e git://github.com/FabianoAlmeidaMelo/django-localbr.git@6aebd61b59e4ab419dae8ee6c4558f32c1a5d24c#egg=django_localbr
 django-localflavor==1.4.1
--e git://github.com/znc-sistemas/django-municipios.git@024d7af7642edf281ba44f5bb4e61de344d0deb9#egg=django_municipios
 idna==2.6
-Pillow==3.4.2
 psycopg2==2.6.2
 python-decouple==3.0
 pytz==2018.5
