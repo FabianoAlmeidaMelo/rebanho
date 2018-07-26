@@ -6,7 +6,7 @@ from rebanho.core.models import User
 class UserModelTest(TestCase):
     """
     python manage.py test
-    
+
     Sem rodar as migrações:
     python manage.py test --nomigrations
     """
