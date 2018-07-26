@@ -37,8 +37,8 @@ class HomeTest(TestCase):
             with self.subTest():
                 self.assertContains(self.response, expected)
 
-    def test_nav_bar_login_link(self):
-        """verifica se tem o link para voltar ao topo da página"""
-        expected = 'href="{}"'.format(resolve_url('login'))
-        self.assertContains(self.response, expected)
+    # def test_nav_bar_login_link(self):
+    #     """verifica se tem o link para voltar ao topo da página"""
+    #     expected = 'href="{}"'.format(resolve_url('login'))
+    #     self.assertContains(self.response, expected)
  

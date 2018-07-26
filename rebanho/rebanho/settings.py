@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap3',
+    'test_without_migrations',
     'localbr',
     'municipios',
     'rebanho.core',
@@ -85,7 +86,7 @@ WSGI_APPLICATION = 'rebanho.wsgi.application'
 
 # ######### CUSTOM USER CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
-# AUTH_USER_MODEL = 'core.User'
+AUTH_USER_MODEL = 'core.User'
 # ######### END CUSTOM USER CONFIGURATION
 
 # ######### CUSTOM LOGIN URL CONFIGURATION
