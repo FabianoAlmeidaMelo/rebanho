@@ -102,12 +102,25 @@ LOGIN_REDIRECT_URL = '/'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+#  ######### DATABASE CONFIGURATION
+DATABASE_ENGINE = config('DATABASE_ENGINE', default='')
+DATABASE_NAME = config('DATABASE_NAME', default='')
+DATABASE_USER = config('DATABASE_USER', default='')
+DATABASE_PASS = config('DATABASE_PASS', default='')
+DATABASE_HOST = config('DATABASE_HOST', default='localhost')
+DATABASE_PORT = config('DATABASE_PORT', default='5432')
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': DATABASE_ENGINE,
+        'NAME': DATABASE_NAME,
+        'USER': DATABASE_USER,
+        'PASSWORD': DATABASE_PASS,
+        'HOST': DATABASE_HOST,
+        'PORT': DATABASE_PORT,
     }
 }
+#  ######### END DATABASE CONFIGURATION
 
 
 # Password validation
