@@ -13,7 +13,7 @@ class AuthenticationForm(AuthAuthenticationForm):
                                         )
 class UserForm(forms.ModelForm):
     '''
-    #4 Cadstyro e Edição de User
+    #4 Cadstro e Edição de User
     '''
     email = forms.EmailField(label='email', required=True)
     nome = forms.CharField(label='nome', required=True)
@@ -48,7 +48,6 @@ class UserSearchForm(forms.Form):
     email = forms.CharField(label=u'email', required=False)
 
     def __init__(self, *args, **kargs):
-        self.escola = kargs.pop('escola', None)
         super(UserSearchForm, self).__init__(*args, **kargs)
        
 

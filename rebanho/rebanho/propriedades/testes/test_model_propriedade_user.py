@@ -1,7 +1,7 @@
 
 from django.test import TestCase
 from django.shortcuts import resolve_url
-from dete import datetime
+
 from rebanho.propriedades.models import Propriedade, PropriedadeUser
 from rebanho.core.models import User
 
@@ -37,7 +37,7 @@ class PropriedadeUserModelTest(TestCase):
 
     def test_date_joined(self):
         field = self.propriedade_user._meta.get_field('date_joined')
-        self.assertEqual(type(self.propriedade_user.date_joined), datetime)
+        self.assertTrue(self.propriedade_user.date_joined is not None)
 
     def test_ativo_true(self):
         field = self.propriedade_user._meta.get_field('ativo')

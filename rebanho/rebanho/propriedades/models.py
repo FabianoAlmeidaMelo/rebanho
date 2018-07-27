@@ -3,16 +3,13 @@ from django.utils import timezone
 
 class Propriedade(models.Model):
      
-    cnpj = models.CharField(max_length=14, unique=True)  # *****
+    cnpj = models.CharField(max_length=14, unique=True)
     nome = models.CharField(max_length=150)
     nirf = models.CharField(max_length=12,null=True,blank=True)
     incra= models.CharField(max_length=12, null=True,blank=True)
     
-    endereco = models.CharField(max_length=150,null=True, blank=True)
-    bairro = models.CharField(max_length=50,null=True, blank=True)
-    municipio = models.CharField(max_length=60,null=True, blank=True)
-    referencia = models.CharField(max_length=200,null=True, blank=True)
-    area_total = models.FloatField(max_length=5,null=True, blank=True)
+    # endereco = tabela do core, usando o django municipios, #TODO
+
     telefone = models.CharField(max_length=12,null=True, blank=True)
     nome_contato = models.CharField(max_length= 30,null=True, blank=True)
 

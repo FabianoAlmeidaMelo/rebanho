@@ -177,10 +177,10 @@ if DEBUG is False:
     MEDIA_URL= "//%s/media/"  % AWS_S3_CUSTON_DOMAIN
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfile')
-# Ex  Local: /home/fabiano/projetos/escolar/escolar/staticfile
+# Ex  Local: /home/fabiano/projetos/rebanho/rebanho/staticfile
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# Ex Local: /home/fabiano/projetos/escolar/escolar/media
+# Ex Local: /home/fabiano/projetos/rebanho/rebanho/media
 
 # Email configuration
 EMAIL_BACKEND = config('EMAIL_BACKEND')
