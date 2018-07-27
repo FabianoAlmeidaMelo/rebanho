@@ -62,10 +62,10 @@ def usuario_form(request, pk=None):
     user = request.user
     if pk:
         usuario = get_object_or_404(User, pk=pk)
-        msg = u'Usuário alterado com sucesso.'
+        msg = u'Usuário alterado com sucesso. '
     else:
         usuario = None
-        msg = u'Usuário cadastrado.'
+        msg = u'Usuário cadastrado. '
 
     can_edit = True
     if not can_edit:

@@ -1,16 +1,16 @@
 from django.test import TestCase
 from django.shortcuts import resolve_url
 from django.urls import reverse
+from rebanho.propriedades.models import Propriedade
 from rebanho.core.models import User
 
-
-class UsuariosListTest(TestCase):
+class PropriedadeListTest(TestCase):
     """
     python manage.py test
     """
 
     def setUp(self):
-        self.response = self.client.get(resolve_url('usuarios_list'))
+        self.response = self.client.get(resolve_url('propriedades_list'))
         self.user1 = User.objects.create(email = 'falmeidamelo@uol.com.br',
                                          username = 'user1',
                                          nome = 'Fabiano Almeida')
@@ -24,39 +24,40 @@ class UsuariosListTest(TestCase):
     def test_get_autenticado(self):
         """GET / retorna status code 200"""
         login = self.client.login(username='user1', password='12345')
-        response = self.client.get(reverse('usuarios_list'))
+        response = self.client.get(reverse('propriedades_list'))
         return self.assertEqual(200, response.status_code)
 
     def test_template(self):
         """verifica se está usando o propriedades_list.html"""
         login = self.client.login(username='user1', password='12345')
-        response = self.client.get(reverse('usuarios_list'))
-        self.assertTemplateUsed(response, 'core/usuarios_list.html')
+        response = self.client.get(reverse('propriedades_list'))
+        self.assertTemplateUsed(response, 'propriedades/propriedades_list.html')
 
     def test_pagination(self):
         """verifica se está usando o pagination.html"""
         login = self.client.login(username='user1', password='12345')
-        response = self.client.get(reverse('usuarios_list'))
+        response = self.client.get(reverse('propriedades_list'))
         self.assertTemplateUsed(response, 'pagination.html')
 
-    def test_usuario_form_link(self):
+    def test_propriedade_form_link(self):
         """verifica se tem o link para o formulário de usuário"""
         login = self.client.login(username='user1', password='12345')
-        response = self.client.get(reverse('usuarios_list'))
-        expected = 'href="{}"'.format(resolve_url('usuario_form'))
+        response = self.client.get(reverse('propriedades_list'))
+        expected = 'href="{}"'.format(resolve_url('propriedade_form'))
         self.assertContains(response, expected)
 
     def test_textos_no_html(self):
         """verifica os textos no html"""
         login = self.client.login(username='user1', password='12345')
-        response = self.client.get(reverse('usuarios_list'))
+        response = self.client.get(reverse('propriedades_list'))
 
         contents = [
-            'Usuários',
-            'Novo Usuário',
+            'Propriedades',
+            'CNPJ',
             'Nome',
-            'Email',
-            # 'Nenhum usuário encontrado'   # Tem ao menos 1 user, o que está logado
+            'NIRF',
+            'Incra',
+            'Nenhuma propriedade encontrada'
         ]
         for expected in contents:
             with self.subTest():

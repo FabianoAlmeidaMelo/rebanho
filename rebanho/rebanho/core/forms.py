@@ -39,6 +39,15 @@ class UserForm(forms.ModelForm):
             raise forms.ValidationError("Confirme a senha")
         return password2
 
+    def save(self, commit=False):
+        self.instance.username = self.instance.email
+        password2 = self.cleaned_data.get("password2", False)
+        if password2:
+            self.instance.set_password(password2)
+        self.instance.save()
+
+        return self.instance
+
 
 class UserSearchForm(forms.Form):
     '''

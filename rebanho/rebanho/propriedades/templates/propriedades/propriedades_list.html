@@ -1,0 +1,64 @@
+{% extends 'base.html'%}
+{% load bootstrap3 %}
+
+{% block css %}
+{% endblock css %}
+{% block page_title %}
+  <div class="page-header">
+    <br>
+    Propriedades
+  </div>
+{% endblock page_title %}
+
+{% block content %}
+<div class="container">
+  <div class="row-fluid span10">
+    <form class="form-inline well" method="GET" >
+      <div class="form-group">
+        {% bootstrap_field form.cnpj %}
+        {% bootstrap_field form.nome %}
+      </div>
+      <button type="submit" class="btn btn-primary" title="Filtrar"><i class="glyphicon glyphicon-search"></i></button>
+      <a class="btn btn-small btn-info" href="." title="Apagar o filtro e listar todos"><i class="glyphicon glyphicon-remove-circle"></i></a>
+      <div style="float:right; margin-right:10px">
+         <a href="{% url 'propriedade_form' %}" class="btn btn-mini btn-success">Nova Propriedade</a>
+      </div>
+    </form>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>CNPJ</th>
+        <th>Nome</th>
+        <th>NIRF</th>
+        <th>Incra</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for propriedade in object_list %}
+      <tr>
+        <td>
+          {% if can_edit or propriedade.id == user.id %}
+          <a href="{% url 'propriedade_form' propriedade.id %}">{{ propriedade.cnpj }}</a>
+          {% else %}
+            {{ propriedade.cnpj }}
+          {% endif %}
+        </td>
+        <td>{{ propriedade.nome }}</td>
+        <td>{{ propriedade.nirf|default:"--" }}</td>
+        <td>{{ propriedade.incra|default:"--" }}</td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td>
+          Nenhuma propriedade encontrada
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% include 'pagination.html' %}
+</div>
+{% endblock content %}
+{% block extra_js %}
+{% endblock extra_js%}

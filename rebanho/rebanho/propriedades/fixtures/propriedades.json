@@ -1,0 +1,48 @@
+[
+    {
+        "model": "propriedades.propriedade",
+        "pk": 1,
+        "fields": {
+            "cnpj": "61.675.372/0001-02",
+            "nome": "Fazenda Vera Cruz",
+            "nirf": "123",
+            "incra": "345",
+            "telefone": "12982239764",
+            "nome_contato": "Fabiano de Almeida Melo"
+        }
+    },
+    {
+        "model": "propriedades.propriedade",
+        "pk": 2,
+        "fields": {
+            "cnpj": "83.171.847/0001-66",
+            "nome": "Fazenda Santa Branca",
+            "nirf": null,
+            "incra": null,
+            "telefone": null,
+            "nome_contato": null
+        }
+    },
+    {
+        "model": "propriedades.propriedadeuser",
+        "pk": 1,
+        "fields": {
+            "propriedade": 1,
+            "user": 1,
+            "owner": true,
+            "date_joined": "2018-07-27T20:30:21.788Z",
+            "ativo": true
+        }
+    },
+    {
+        "model": "propriedades.propriedadeuser",
+        "pk": 2,
+        "fields": {
+            "propriedade": 2,
+            "user": 2,
+            "owner": true,
+            "date_joined": "2018-07-27T20:32:24.391Z",
+            "ativo": true
+        }
+    }
+]

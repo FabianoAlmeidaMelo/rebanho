@@ -4,7 +4,7 @@
 {% block page_title %}
   <div class="page-header">
     <br>
-    Usuários
+    Propriedades
   </div>
 {% endblock page_title %}
 
@@ -14,23 +14,25 @@
   <div class="row-fluid span10">
     <form method="POST">
       {% csrf_token %}
-      <div class="form-group">
+      <div class="form-group center_div" >
         <div class="row">
           <div class="col-xs-9 col-sm-6 col-md-3">
             {% bootstrap_field form.nome %}
-            {% bootstrap_field form.email %}
+            {% bootstrap_field form.cnpj %}
           </div>
-        </div>
-        <div class="row">
           <div class="col-xs-9 col-sm-6 col-md-3">
-            {% bootstrap_field form.password1 %}
-            {% bootstrap_field form.password2 %}
+              {% bootstrap_field form.nirf %}
+              {% bootstrap_field form.incra %}
+          </div>
+          <div class="col-xs-9 col-sm-6 col-md-3">
+              {% bootstrap_field form.telefone %}
+              {% bootstrap_field form.nome_contato %}
           </div>
         </div>
       </div>
       <div class="form-actions">
         <input type="submit" value="Salvar" class="btn btn-primary">
-        <a href="{% url 'usuarios_list' %}" class="btn btn-secondary">Cancelar</a>
+        <a href="{% url 'propriedades_list' %}" class="btn btn-secondary">Cancelar</a>
       </div>
     </form>
   </div>

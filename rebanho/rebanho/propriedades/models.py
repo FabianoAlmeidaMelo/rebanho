@@ -3,7 +3,7 @@ from django.utils import timezone
 
 class Propriedade(models.Model):
      
-    cnpj = models.CharField(max_length=14, unique=True)
+    cnpj = models.CharField(max_length=18, unique=True)
     nome = models.CharField(max_length=150)
     nirf = models.CharField(max_length=12,null=True,blank=True)
     incra= models.CharField(max_length=12, null=True,blank=True)
@@ -20,6 +20,10 @@ class Propriedade(models.Model):
 
     def __str__(self):
         return self.nome
+
+    def can_edit(self, user):
+        return self.id in user.propriedadeuser_set.all().values_list('propriedade__id', flat=True)
+
 
 class PropriedadeUser(models.Model):
     propriedade = models.ForeignKey(Propriedade)
