@@ -1,12 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
+  {% if user.is_authenticated %}
     <div class="container">
       {% block page_title %}
       <br>
 
       {% endblock page_title %}
     </div>
+    <div class="container">
+      <h3 align=”right”>Bem vindo ao sistema Gestão de Pecuária 4.0</h3><small>Trabalhamos para otmizar seu tempo e os lucros da sua propriedade</small>
+      <h4>{{ request.user.nome }}, mantenha seus dados atualizados e lhe ajudaremos a tomar as melhores decisões</h4>
+    </div>
+  {% else %}
     <div class="container">
       <h2 align=”right”>Gestão de rebanhos de Corte</h2>
     <div class="jumbotron">
@@ -28,10 +34,7 @@
         </div>
       </div>
     </div>
-
-      <!-- Example row of columns -->
     <div class="container">
-      <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-4">
           <h5>Controle das Vacinas</h5>
@@ -43,13 +46,11 @@
           <h5>Aplicativo para Controles no Campo</h5>
           <!-- <p><a class="btn btn-default" href="#" role="button">Detalhes &raquo;</a></p> -->
         </div>
-
         <div class="col-md-4">
           <h5>Atende a Rastreabilidade</h5>
           <p>Integra com várias balanças e leitores RFID</p>
         </div>
       <hr>
-
     </div> 
-
+  {% endif %}  
 {% endblock content %}

@@ -11,11 +11,10 @@ class UserModelTest(TestCase):
     python manage.py test --nomigrations
     """
     def setUp(self):
-        self.user = User.objects.create(
-                                        email = 'falmeidamelo@uol.com.br',
+        self.user = User.objects.create(email = 'falmeidamelo@uol.com.br',
                                         username = 'falmeidamelo@uol.com.br',
                                         nome = 'Fabiano Almeida',
-                                    )
+                                        password='12345')
 
     def test_create(self):
         self.assertTrue(User.objects.exists())

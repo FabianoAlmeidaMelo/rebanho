@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
@@ -18,6 +19,7 @@ def home(request):
     return render(request, 'index.html', context)
 
 
+@login_required
 def usuarios_list(request):
     """
     ref #4 Listagem de usuários
@@ -52,6 +54,7 @@ def usuarios_list(request):
     return render(request, 'core/usuarios_list.html', context)
 
 
+@login_required
 def usuario_form(request, pk=None):
     """
     ref #4 Cadastro e edição de Usuários

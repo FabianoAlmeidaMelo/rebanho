@@ -10,11 +10,19 @@
   </div>
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    <ul class="nav navbar-nav">
-      <li class="{{ tab_usuarios }}"><a href="{% url 'usuarios_list' %}" id='id_usuarios'>Usuários</a></li>
-      <li class="{% if section.selected %}active{% endif %}"><a href="#"><i class="{{ section.icon }}"></i> {{ section.name }}</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href=""><i class="glyphicon glyphicon-log-in"></i>Entrar</a></li>
-    </ul>
+    {% if user.is_authenticated %}
+      <ul class="nav navbar-nav">
+        <li class="{{ tab_usuarios }}"><a href="{% url 'usuarios_list' %}" id='id_usuarios'>Usuários</a></li>
+        <li class="{% if section.selected %}active{% endif %}"><a href="#"><i class="{{ section.icon }}"></i> {{ section.name }}</a></li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li{% if active_perfil %} class="active"{% endif %}><a href="{% url 'usuario_form' request.user.id %}"><i class="glyphicon glyphicon-user"></i> {{ request.user.email }}</a></li>
+        <li><a href="{% url 'logout' %}"><i class="glyphicon glyphicon-off"></i> Sair </a></li>
+      </ul>
+    {% else %}
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'login' %}"><i class="glyphicon glyphicon-log-in"></i> Entrar </a></li>
+      </ul>
+    {% endif %}
   </div><!-- /.navbar-collapse -->

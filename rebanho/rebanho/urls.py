@@ -15,9 +15,20 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.contrib.auth.views import (
+            logout,
+            login,
+        )
+from rebanho.core.forms import AuthenticationForm
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('rebanho.core.urls')),
+    # Logins
+    url(r'^logout/$', logout, {"next_page": None}, name="logout"),
+    url(r'^logout/(?P<next_page>.*)/$', logout, name='auth_logout_next'),
+    url(r'^login/$', login,
+        {"template_name": 'login.html', "authentication_form": AuthenticationForm,},
+        name="login"),
 ]
 
