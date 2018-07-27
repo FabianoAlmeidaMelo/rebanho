@@ -15,7 +15,7 @@ class PropriedadeForm(forms.ModelForm):
     #7 Cadstro e Edição de Propriedade
     '''
     cnpj = BRCNPJField()  # *****
-    nome = models.CharField(max_length=150)
+    nome = forms.CharField(max_length=150)
 
     class Meta:
         model = Propriedade
