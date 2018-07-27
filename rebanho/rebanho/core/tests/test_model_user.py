@@ -1,9 +1,9 @@
 from django.test import TestCase
 from django.shortcuts import resolve_url
-from django.core.exceptions import ValidationError
+
 from rebanho.core.models import User
 
-class UserModelTest(TestCase):
+class PropriedadeModelTest(TestCase):
     """
     python manage.py test
 

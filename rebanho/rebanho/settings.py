@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'localbr',
     'municipios',
     'rebanho.core',
+    'rebanho.propriedades'
 ]
 
 MIDDLEWARE = [

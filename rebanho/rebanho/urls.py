@@ -24,7 +24,8 @@ from rebanho.core.forms import AuthenticationForm
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('rebanho.core.urls')),
-    # Logins
+    url(r'^', include('rebanho.propriedades.urls')),
+    # Login Logout
     url(r'^logout/$', logout, {"next_page": None}, name="logout"),
     url(r'^logout/(?P<next_page>.*)/$', logout, name='auth_logout_next'),
     url(r'^login/$', login,
