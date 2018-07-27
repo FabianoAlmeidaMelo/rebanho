@@ -1,0 +1,62 @@
+{% extends 'base.html'%}
+{% load bootstrap3 %}
+
+{% block css %}
+{% endblock css %}
+{% block page_title %}
+  <div class="page-header">
+    <br>
+    Usuários
+  </div>
+{% endblock page_title %}
+
+{% block content %}
+<div class="container">
+  <div class="row-fluid span10">
+    <form class="form-inline well" method="GET" >
+      <div class="form-group">
+        {% bootstrap_field form.email %}
+        {% bootstrap_field form.nome %}
+      </div>
+      <button type="submit" class="btn btn-primary" title="Filtrar"><i class="glyphicon glyphicon-search"></i></button>
+      <a class="btn btn-small btn-info" href="." title="Apagar o filtro e listar todos"><i class="glyphicon glyphicon-remove-circle"></i></a>
+      <div style="float:right; margin-right:10px">
+         <a href="{% url 'usuario_form' %}" class="btn btn-mini btn-success">Novo Usuário</a>
+      </div>
+    </form>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for usuario in object_list %}
+      <tr>
+        <td>
+          {% if can_edit or usuario.id == user.id %}
+          <a href="{% url 'usuario_form' usuario.id %}">{{ usuario.nome }}</a>
+          {% else %}
+            {{ usuario.nome }}
+          {% endif %}
+        </td>
+        <td>
+          {{ usuario.email }}
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td>
+          Nenhum usuário encontrado
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% include 'pagination.html' %}
+</div>
+{% endblock content %}
+{% block extra_js %}
+{% endblock extra_js%}

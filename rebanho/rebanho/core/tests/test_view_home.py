@@ -25,6 +25,7 @@ class HomeTest(TestCase):
     def test_titulos_no_html(self):
         """verifica os títulos"""
         contents = [
+            'Gestão de rebanhos de Corte',
             'Agilidade no Manejo',
             'Velocidade na pesagem',
             'Fluxo de Caixa da Fazenda',
