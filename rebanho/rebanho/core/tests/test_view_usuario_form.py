@@ -28,7 +28,7 @@ class UsuariosFormTest(TestCase):
         return self.assertEqual(200, response.status_code)
 
     def test_template(self):
-        """verifica se está usando o index.html"""
+        """verifica se está usando o usuario_form.html"""
         login = self.client.login(username='user1', password='12345')
         response = self.client.get(reverse('usuario_form'))
         self.assertTemplateUsed(response, 'core/usuario_form.html')
