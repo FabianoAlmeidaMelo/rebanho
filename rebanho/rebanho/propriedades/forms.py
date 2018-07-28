@@ -34,7 +34,10 @@ class AnimalForm(forms.ModelForm):
         cleaned_data = super(AnimalForm, self).clean()
         saida = cleaned_data['saida']
         motivo_saida = cleaned_data['motivo_saida']
-    
+        brinco = self.cleaned_data['brinco']
+
+        if Animal.objects.filter(brinco=brinco, propriedade=self.propriedade).exclude(pk=self.instance.pk).count():
+            self.errors['brinco'] = ErrorList([u'Esse brinco já consta nos seus registros'])
         if saida and not motivo_saida:
             self.errors['motivo_saida'] = ErrorList([u'Se preencher a Data de Saída, o Motivo será requerido'])
         

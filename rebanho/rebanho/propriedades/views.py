@@ -68,7 +68,8 @@ def animal_form(request, propriedade_pk, animal_pk=None):
         msg = u'Animal cadastrado. '
 
     can_edit = all([True if not animal else animal.can_edit(user),
-                    propriedade.can_edit(user)])
+                    propriedade.can_edit(user),
+                    animal.propriedade.id == propriedade.id if animal else True])
     if not can_edit:
         raise Http404
 
