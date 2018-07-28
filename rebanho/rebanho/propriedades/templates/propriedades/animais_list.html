@@ -46,9 +46,9 @@
       <tr>
         <th>Brinco</th>
         <th>Sexo</th>
-        <th>Peso</th>
         <th>Última pesagem</th>
-        <th>Data</th>
+        <th>Peso</th>
+        <th>Data / status</th>
       </tr>
     </thead>
     <tbody>
@@ -62,8 +62,8 @@
           {% endif %}
         </td>
         <td>{{ animal.get_sexo_display }}</td>
-        <td>{{ animal.get_peso|default:"--" }}</td>
-        <td>{{ animal.get_ultima_pesagem|default:"--" }}</td>
+        <td>{{ animal.get_ultima_pesagem.data|date:"d/m/Y"|default:"--" }}</td>
+        <td>{{ animal.get_ultima_pesagem.peso|default:"--" }}</td>
         <td>{{ animal.get_data_status.0|date:"d/m/Y"|default:"--" }} <b>{{ animal.get_data_status.1 }}</b></td>
       </tr>
       {% empty %}

@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.shortcuts import resolve_url
-
-from rebanho.propriedades.models import Propriedade
+from rebanho.core.models import User
+from rebanho.propriedades.models import Propriedade, PropriedadeUser
 
 class UserModelTest(TestCase):
     """
@@ -11,10 +11,16 @@ class UserModelTest(TestCase):
     python manage.py test --nomigrations
     """
     def setUp(self):
+        self.user = User.objects.create(email = 'falmeidamelo@uol.com.br',
+                                        username = 'user1',
+                                        nome = 'Fabiano Almeida')
         self.propriedade = Propriedade.objects.create(cnpj = '12345678912345',
                                                       nirf = '123456',
                                                       nome = 'Fazenda Vera Cruz',
                                                       incra='incr4')
+        self.prop_user = PropriedadeUser.objects.create(propriedade=self.propriedade,
+                                                        user=self.user,
+                                                        owner=True)
 
     def test_create(self):
         "verifca se tem um ID"
@@ -36,6 +42,5 @@ class UserModelTest(TestCase):
         self.assertEqual('incr4', str(self.propriedade.incra))
 
     def test_can_edit(self):
-        # Quebra, para Não esquecer:
-        # can_edit() missing 1 required positional argument: 'user'
-        self.assertTrue(self.propriedade.can_edit())
+        # True
+        self.assertTrue(self.propriedade.can_edit(self.user))

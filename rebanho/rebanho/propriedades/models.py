@@ -96,29 +96,17 @@ class Animal(models.Model):
 
     def can_edit(self, user):
         """
-        TODO: teste
-        test_can_edit
         retorna True or False
         """
         return self.propriedade_id in user.propriedadeuser_set.all().values_list('propriedade__id', flat=True)
 
-    def get_peso(self):
-        """
-        TODO: teste
-        test_get_peso
-        retorna o peso na pesagem mais recente
-        ou None
-        """
-        return None
 
-    def get_data_ultima_pesagem(self):
+    def get_ultima_pesagem(self):
         """
-        TODO: teste
-        test_get_data_ultima_pesagem
-        retorna a Data da pesagem mais recente
+        retorna a pesagem mais recente
         ou None
         """
-        return None
+        return self.animalpesagem_set.all().order_by('data').last()
 
 
     def get_data_status(self):
