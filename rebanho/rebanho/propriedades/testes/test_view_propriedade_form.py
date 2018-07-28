@@ -47,7 +47,7 @@ class PropriedadeFormTest(TestCase):
         response = self.client.get(reverse('propriedade_form'))
         contents = [
             'Propriedades',
-            'Nome',
+            'Nome da Propriedade',
             'Nirf',
             'Cnpj',
             'Telefone',

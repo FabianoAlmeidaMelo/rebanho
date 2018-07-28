@@ -7,6 +7,7 @@ from localbr.formfields import BRCNPJField
 
 from rebanho.propriedades.models import (
     Propriedade,
+    PropriedadeUser,
 )
 
 
@@ -15,7 +16,7 @@ class PropriedadeForm(forms.ModelForm):
     #7 Cadastro e Edição de Propriedade
     '''
     cnpj = BRCNPJField(always_return_formated=True)
-    nome = forms.CharField(max_length=150)
+    nome = forms.CharField(label="Nome da Propriedade", max_length=150)
 
     class Meta:
         model = Propriedade
@@ -30,6 +31,19 @@ class PropriedadeForm(forms.ModelForm):
         self.user = kwargs.pop('user', None)
         super(PropriedadeForm, self).__init__(*args, **kwargs)
 
+    def save(self, *args, **kwargs):
+        is_new = False
+        if not self.instance.pk:
+            is_new = True
+        instance = super(PropriedadeForm, self).save(*args, **kwargs)
+        if is_new:
+            PropriedadeUser.objects.get_or_create(propriedade=instance,
+                                                  user=self.user,
+                                                  owner=True)
+
+        instance.save()
+
+        return instance
 
 
 class PropriedadeSearchForm(forms.Form):
