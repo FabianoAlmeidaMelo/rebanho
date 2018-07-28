@@ -23,15 +23,15 @@ class UserModelTest(TestCase):
     def test_str(self):
         self.assertEqual('Fazenda Vera Cruz', str(self.propriedade))
 
-    def test_email_unique(self):
+    def test_cnpj_unique(self):
         field = self.propriedade._meta.get_field('cnpj')
         self.assertTrue(field.unique)
 
     def test_nirf(self):
-        field = self.propriedade._meta.get_field('nirf')
+        # field = self.propriedade._meta.get_field('nirf')
         self.assertEqual('123456', str(self.propriedade.nirf))
 
     def test_incra(self):
-        field = self.propriedade._meta.get_field('incra')
+        # field = self.propriedade._meta.get_field('incra')
         self.assertEqual('incr4', str(self.propriedade.incra))
 

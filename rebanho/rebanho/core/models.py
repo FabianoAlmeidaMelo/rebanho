@@ -53,3 +53,10 @@ class User(AbstractBaseUser):
 
     def __str__(self):
         return self.nome
+
+    def get_propriedades(self):
+        """
+        retorna uma lista de Propriedades
+        que tem vínculo com o user
+        """
+        return [p.propriedade for p in self.propriedadeuser_set.all()]
