@@ -1,48 +1,209 @@
 [
-    {
-        "model": "propriedades.propriedade",
-        "pk": 1,
-        "fields": {
-            "cnpj": "61.675.372/0001-02",
-            "nome": "Fazenda Vera Cruz",
-            "nirf": "123",
-            "incra": "345",
-            "telefone": "12982239764",
-            "nome_contato": "Fabiano de Almeida Melo"
-        }
-    },
-    {
-        "model": "propriedades.propriedade",
-        "pk": 2,
-        "fields": {
-            "cnpj": "83.171.847/0001-66",
-            "nome": "Fazenda Santa Branca",
-            "nirf": null,
-            "incra": null,
-            "telefone": null,
-            "nome_contato": null
-        }
-    },
-    {
-        "model": "propriedades.propriedadeuser",
-        "pk": 1,
-        "fields": {
-            "propriedade": 1,
-            "user": 1,
-            "owner": true,
-            "date_joined": "2018-07-27T20:30:21.788Z",
-            "ativo": true
-        }
-    },
-    {
-        "model": "propriedades.propriedadeuser",
-        "pk": 2,
-        "fields": {
-            "propriedade": 2,
-            "user": 2,
-            "owner": true,
-            "date_joined": "2018-07-27T20:32:24.391Z",
-            "ativo": true
-        }
+{
+    "model": "propriedades.propriedade",
+    "pk": 1,
+    "fields": {
+        "cnpj": "61.675.372/0001-02",
+        "nome": "Fazenda Vera Cruz",
+        "nirf": "123",
+        "incra": "345",
+        "telefone": "12982239764",
+        "nome_contato": "Fabiano de Almeida Melo"
     }
+},
+{
+    "model": "propriedades.propriedade",
+    "pk": 2,
+    "fields": {
+        "cnpj": "83.171.847/0001-66",
+        "nome": "Fazenda Santa Branca",
+        "nirf": null,
+        "incra": null,
+        "telefone": null,
+        "nome_contato": null
+    }
+},
+{
+    "model": "propriedades.propriedade",
+    "pk": 4,
+    "fields": {
+        "cnpj": "09.444.171/0001-84",
+        "nome": "Rancho Fundo",
+        "nirf": "468163146",
+        "incra": "5458",
+        "telefone": "1237896452",
+        "nome_contato": "Silvio"
+    }
+},
+{
+    "model": "propriedades.propriedadeuser",
+    "pk": 1,
+    "fields": {
+        "propriedade": 1,
+        "user": 1,
+        "owner": true,
+        "date_joined": "2018-07-27T20:30:21.788Z",
+        "ativo": true
+    }
+},
+{
+    "model": "propriedades.propriedadeuser",
+    "pk": 2,
+    "fields": {
+        "propriedade": 2,
+        "user": 2,
+        "owner": true,
+        "date_joined": "2018-07-27T20:32:24.391Z",
+        "ativo": true
+    }
+},
+{
+    "model": "propriedades.propriedadeuser",
+    "pk": 3,
+    "fields": {
+        "propriedade": 4,
+        "user": 1,
+        "owner": true,
+        "date_joined": "2018-07-28T00:44:00.378Z",
+        "ativo": true
+    }
+},
+{
+    "model": "propriedades.animal",
+    "pk": 1,
+    "fields": {
+        "propriedade": 1,
+        "sexo": 1,
+        "brinco": "FVC12345",
+        "nascimento": "2016-06-20T03:00:00Z",
+        "entrada": null,
+        "saida": null,
+        "motivo_saida": null,
+        "date_joined": "2018-07-28T18:24:44.038Z"
+    }
+},
+{
+    "model": "propriedades.animal",
+    "pk": 2,
+    "fields": {
+        "propriedade": 1,
+        "sexo": 1,
+        "brinco": "FVC00037",
+        "nascimento": "2015-07-28T03:00:00Z",
+        "entrada": "2015-07-28T03:00:00Z",
+        "saida": "2018-07-28T03:00:00Z",
+        "motivo_saida": 1,
+        "date_joined": "2018-07-28T18:57:44.419Z"
+    }
+},
+{
+    "model": "propriedades.animal",
+    "pk": 3,
+    "fields": {
+        "propriedade": 1,
+        "sexo": 1,
+        "brinco": "FVC26166",
+        "nascimento": "2017-06-21T03:00:00Z",
+        "entrada": "2017-06-21T03:00:00Z",
+        "saida": null,
+        "motivo_saida": null,
+        "date_joined": "2018-07-28T20:05:37.025Z"
+    }
+},
+{
+    "model": "propriedades.animal",
+    "pk": 5,
+    "fields": {
+        "propriedade": 1,
+        "sexo": 2,
+        "brinco": "FVC12346",
+        "nascimento": null,
+        "entrada": null,
+        "saida": null,
+        "motivo_saida": null,
+        "date_joined": "2018-07-28T20:11:24.229Z"
+    }
+},
+{
+    "model": "propriedades.animal",
+    "pk": 6,
+    "fields": {
+        "propriedade": 4,
+        "sexo": 1,
+        "brinco": "RF12345",
+        "nascimento": null,
+        "entrada": null,
+        "saida": null,
+        "motivo_saida": null,
+        "date_joined": "2018-07-28T20:15:12.667Z"
+    }
+},
+{
+    "model": "propriedades.animal",
+    "pk": 7,
+    "fields": {
+        "propriedade": 4,
+        "sexo": 1,
+        "brinco": "RF12347",
+        "nascimento": null,
+        "entrada": null,
+        "saida": null,
+        "motivo_saida": null,
+        "date_joined": "2018-07-28T20:15:39.402Z"
+    }
+},
+{
+    "model": "propriedades.animalpesagem",
+    "pk": 1,
+    "fields": {
+        "animal": 1,
+        "data": "2018-07-28T20:19:29.233Z",
+        "peso": "470.348"
+    }
+},
+{
+    "model": "propriedades.animalpesagem",
+    "pk": 2,
+    "fields": {
+        "animal": 2,
+        "data": "2018-07-28T20:19:29.233Z",
+        "peso": "460.546"
+    }
+},
+{
+    "model": "propriedades.animalpesagem",
+    "pk": 3,
+    "fields": {
+        "animal": 3,
+        "data": "2018-07-28T20:19:29.233Z",
+        "peso": "468.246"
+    }
+},
+{
+    "model": "propriedades.animalpesagem",
+    "pk": 4,
+    "fields": {
+        "animal": 3,
+        "data": "2018-03-25T20:19:29.233Z",
+        "peso": "432.460"
+    }
+},
+{
+    "model": "propriedades.animalpesagem",
+    "pk": 5,
+    "fields": {
+        "animal": 1,
+        "data": "2018-03-25T20:19:29.233Z",
+        "peso": "428.143"
+    }
+},
+{
+    "model": "propriedades.animalpesagem",
+    "pk": 6,
+    "fields": {
+        "animal": 2,
+        "data": "2018-07-28T20:19:29.233Z",
+        "peso": "429.343"
+    }
+}
 ]
