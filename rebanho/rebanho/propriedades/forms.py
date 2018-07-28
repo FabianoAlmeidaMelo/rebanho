@@ -4,7 +4,7 @@ from django import forms
 from django.db.models import Q
 from django.forms.utils import ErrorList
 from localbr.formfields import BRCNPJField
-
+from rebanho.core.widgets import DateTimePicker
 from rebanho.propriedades.models import (
     CHOICE_SEXO,
     Animal,
@@ -17,6 +17,9 @@ class AnimalForm(forms.ModelForm):
     '''
     #8 Cadastro e Edição de Animais
     '''
+    nascimento =forms.DateField(label='Nascimento', required=False, widget=DateTimePicker(options={"format": "DD/MM/YYYY", "pickTime": False}))
+    entrada =forms.DateField(label='Entrada no estoque', required=False, widget=DateTimePicker(options={"format": "DD/MM/YYYY", "pickTime": False}))
+    saida =forms.DateField(label='Sída do estoque', required=False, widget=DateTimePicker(options={"format": "DD/MM/YYYY", "pickTime": False}))
 
     class Meta:
         model = Animal

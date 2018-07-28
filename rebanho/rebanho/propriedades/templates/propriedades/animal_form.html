@@ -1,4 +1,3 @@
-
 {% extends "base.html" %}
 {% load bootstrap3 %}
 
@@ -6,10 +5,10 @@
   <div class="page-header">
     <br>
     {% if animal%}
-      Edição, brinco <small>{{ animal.brinco }}</small>
+      Edição: brinco <small>{{ animal.brinco }}</small>,
     {% else %}
-      Cadastro
-    {% endif %}de animal <small>Propriedade {{ propriedade }}: {{ propriedade.cnpj }}</small>
+      Cadastro:
+    {% endif %} animal / <small>Propriedade {{ propriedade }}: {{ propriedade.cnpj }}</small>
 
   </div>
 {% endblock page_title %}
