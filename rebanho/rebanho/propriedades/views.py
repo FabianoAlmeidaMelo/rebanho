@@ -6,10 +6,89 @@ from django.shortcuts import render
 from django.shortcuts import render, redirect, get_object_or_404, resolve_url
 from django.http import Http404
 from rebanho.propriedades.forms import (
+    AnimalForm,
+    AnimalSearchForm,
     PropriedadeForm,
     PropriedadeSearchForm,
 )
-from rebanho.propriedades.models import Propriedade
+from rebanho.propriedades.models import Animal, Propriedade
+
+
+def animais_list(request, propriedade_pk):
+    """
+    ref #8 Listagem de animais
+    """
+    user = request.user
+    propriedade = get_object_or_404(Propriedade, pk=propriedade_pk)
+    can_edit = propriedade.can_edit(user)
+    if not can_edit:
+        raise Http404
+    
+    form = AnimalSearchForm(request.GET or None, user=user, propriedade=propriedade)
+    animais = form.get_result_queryset()
+    context = {}
+    context['propriedade'] = propriedade
+    can_edit = True 
+    animais = animais.order_by('brinco')
+
+    # ### PAGINAÇÃO ####
+    get_copy = request.GET.copy()
+    context['parameters'] = get_copy.pop('page', True) and get_copy.urlencode()
+    page = request.GET.get('page', 1)
+    paginator = Paginator(animais, 15)
+    try:
+        animais = paginator.page(page)
+    except PageNotAnInteger:
+        animais = paginator.page(1)
+    except EmptyPage:
+        animais = paginator.page(paginator.num_pages)
+    # ### paginação ####
+
+    context['user'] = user
+    context['form'] = form
+    context['object_list'] = animais
+    context['can_edit'] = can_edit
+    context['menu_rebanho'] = "active"
+
+    return render(request, 'propriedades/animais_list.html', context)
+
+
+def animal_form(request, propriedade_pk, animal_pk=None):
+    """
+    ref #8 Cadastro e edição de animais
+    """
+    user = request.user
+    propriedade = get_object_or_404(Propriedade, pk=propriedade_pk)
+
+    if animal_pk:
+        animal = get_object_or_404(Animal, pk=animal_pk)
+        msg = u'Animal alterada com sucesso. '
+    else:
+        animal = None
+        msg = u'Animal cadastrado. '
+
+    can_edit = all([True if not animal else animal.can_edit(user),
+                    propriedade.can_edit(user)])
+    if not can_edit:
+        raise Http404
+
+    form = AnimalForm(request.POST or None, instance=animal, user=user, propriedade=propriedade)
+    context = {}
+    context['animal'] = animal
+    context['form'] = form
+    context['menu_rebanho'] = "active"
+    context['propriedade'] = propriedade
+
+    if request.method == 'POST':
+        if form.is_valid():
+            animal = form.save()
+            msg += animal.brinco
+            messages.success(request, msg)
+        else:
+            messages.warning(request, 'Falha no cadastro do Animal')
+            return render(request, 'propriedades/animal_form.html', context)
+        return redirect(reverse('animais_list', kwargs={"propriedade_pk": propriedade.id}))
+    return render(request, 'propriedades/animal_form.html', context)
 
 
 @login_required
@@ -22,7 +101,7 @@ def propriedades_list(request):
     form = PropriedadeSearchForm(request.GET or None, user=user)
     propriedades = form.get_result_queryset()
     context = {}
-    can_edit = True 
+    can_edit = all([propriedade.can_edit(user) for propriedade in propriedades])
     propriedades = propriedades.order_by('nome')
 
     # ### PAGINAÇÃO ####

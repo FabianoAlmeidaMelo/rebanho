@@ -35,3 +35,7 @@ class UserModelTest(TestCase):
         # field = self.propriedade._meta.get_field('incra')
         self.assertEqual('incr4', str(self.propriedade.incra))
 
+    def test_can_edit(self):
+        # Quebra, para Não esquecer:
+        # can_edit() missing 1 required positional argument: 'user'
+        self.assertTrue(self.propriedade.can_edit())

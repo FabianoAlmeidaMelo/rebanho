@@ -1,0 +1,96 @@
+{% extends 'base.html'%}
+{% load bootstrap3 %}
+
+{% block css %}
+  <style type="text/css">
+    #filtro.off {
+        display: none;
+    }
+    #filtro {
+        padding: 1.2em;
+    }
+  </style>
+{% endblock css %}
+{% block page_title %}
+  <div class="page-header">
+    <br>
+    Animais / {{ propriedade }}: <small>{{ propriedade.cnpj}}</small>
+  </div>
+{% endblock page_title %}
+
+{% block content %}
+<div class="container">
+  <div class="row-fluid span10">
+    <form class="form-inline well" method="GET" >
+      <div class="form-group">
+        {% bootstrap_field form.brinco %}
+        {% bootstrap_field form.sexo %}
+      </div>
+      <button type="submit" class="btn btn-primary" title="Filtrar"><i class="glyphicon glyphicon-search"></i></button>
+      <a class="btn btn-small btn-info" href="." title="Apagar o filtro e listar todos"><i class="glyphicon glyphicon-remove-circle"></i></a>
+      <div style="float:right; margin-right:10px">
+         <a href="{% url 'animal_form' propriedade.id %}" class="btn btn-mini btn-success">Novo Animal</a>
+      </div>
+      <br>
+      <legend style="font-size:12px;">
+       <a href="#" class="panel-showhide"><i class="icon-plus-sign"></i>Opções de Filtro</a></legend>
+        <div class="panel-showhide">
+          <div class="form-group">
+            {% bootstrap_field form.mostrar %}
+          </div>
+        </div>
+    </form>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Brinco</th>
+        <th>Sexo</th>
+        <th>Peso</th>
+        <th>Última pesagem</th>
+        <th>Data</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for animal in object_list %}
+      <tr>
+        <td>
+          {% if can_edit or animal.id == user.id %}
+          <a href="{% url 'animal_form' propriedade.id animal.id %}">{{ animal.brinco }}</a>
+          {% else %}
+            {{ animal.brinco }}
+          {% endif %}
+        </td>
+        <td>{{ animal.get_sexo_display }}</td>
+        <td>{{ animal.get_peso|default:"--" }}</td>
+        <td>{{ animal.get_ultima_pesagem|default:"--" }}</td>
+        <td>{{ animal.get_data_status.0|date:"d/m/Y"|default:"--" }} <b>{{ animal.get_data_status.1 }}</b></td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td>
+          Nenhum animal encontrado
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% include 'pagination.html' %}
+</div>
+{% endblock content %}
+{% block extra_js %}
+  <script type="text/javascript">
+      jQuery(document).ready( function() {
+        /*
+        Show / Hide qualquer div com a class="panel-showhide"
+        O objeto que recebe a funcao para show/hide deve ser um LINK com a mesma classe.
+        Ambos devem estar dentro de um container (fieldset, div ...)
+        */
+        jQuery('div.panel-showhide').hide();
+        jQuery('a.panel-showhide').click( function() {
+            jQuery(this).parent().parent().find('div.panel-showhide').toggle();
+        });
+
+    });
+  </script>
+{% endblock extra_js%}

@@ -48,3 +48,40 @@ class UserModelTest(TestCase):
         field = self.animal._meta.get_field('motivo_saida')
         self.assertEqual(True, field.null)
 
+    ###  Not pass ###
+
+    def test_can_edit(self):
+        # Quebra, para Não esquecer:
+        # can_edit() missing 1 required positional argument: 'user'
+        self.assertTrue(self.animal.can_edit())
+
+    def test_get_peso(self):
+        """
+        TODO: teste
+        test_get_peso
+        retorna o peso na pesagem mais recente
+        ou None
+        """
+        self.assertEqual(Decimal("580.376"), self.animal.get_peso())
+
+    def test_get_data_ultima_pesagem(self):
+        """
+        TODO: teste
+        test_get_ultima_pesagem
+        retorna a Data da pesagem mais recente
+        ou None
+        """
+        self.assertEqual("2018-07-28 11:24", str(self.animal.get_data_ultima_pesagem()))
+
+    def test_get_data_status(self):
+                """
+        TODO: teste
+        test_get_ultima_pesagem
+        retorna a Data da pesagem mais recente
+        ou None
+        """
+        get_data_status = self.animal.get_data_status()
+        data = str(get_data_status[0])
+        status = get_data_status[1]
+        self.assertEqual("None", data)
+        self.assertEqual("", status)

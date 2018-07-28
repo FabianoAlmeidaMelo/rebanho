@@ -2,13 +2,85 @@
 from django import forms
 
 from django.db.models import Q
-
+from django.forms.utils import ErrorList
 from localbr.formfields import BRCNPJField
 
 from rebanho.propriedades.models import (
+    CHOICE_SEXO,
+    Animal,
     Propriedade,
     PropriedadeUser,
 )
+
+
+class AnimalForm(forms.ModelForm):
+    '''
+    #8 Cadastro e Edição de Animais
+    '''
+
+    class Meta:
+        model = Animal
+        exclude = ('propriedade',
+                   'date_joined')
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        self.propriedade = kwargs.pop('propriedade', None)
+        super(AnimalForm, self).__init__(*args, **kwargs)
+        #
+        self.fields['sexo'].initial = 1
+
+    def clean(self):
+        cleaned_data = super(AnimalForm, self).clean()
+        saida = cleaned_data['saida']
+        motivo_saida = cleaned_data['motivo_saida']
+    
+        if saida and not motivo_saida:
+            self.errors['motivo_saida'] = ErrorList([u'Se preencher a Data de Saída, o Motivo será requerido'])
+        
+        return cleaned_data
+
+
+    def save(self, *args, **kwargs):
+        self.instance.propriedade = self.propriedade
+        instance = super(AnimalForm, self).save(*args, **kwargs)
+        instance.save()
+
+        return instance
+
+
+class AnimalSearchForm(forms.Form):
+    '''
+    #8 Filtro na listagem de propriedades
+    '''
+    brinco = forms.CharField(label=u'Nr Brinco', required=False)
+    sexo = forms.ChoiceField(label="Sexo", choices=CHOICE_SEXO[1:], widget=forms.RadioSelect(), required=False)
+    mostrar = forms.BooleanField(label="Mostra somente animais que já não estão no estoque", required=False)
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        self.propriedade = kwargs.pop('propriedade', None)
+        super(AnimalSearchForm, self).__init__(*args, **kwargs)
+       
+
+    def get_result_queryset(self):
+
+        q = Q(propriedade=self.propriedade)
+        if self.is_valid():
+            sexo = self.cleaned_data['sexo']
+            if sexo:
+                q = q & Q(sexo=sexo)
+            brinco = self.cleaned_data['brinco']
+            if brinco:
+                q = q & Q(brinco__icontains=brinco)
+            mostrar = self.cleaned_data['mostrar']
+            if mostrar:
+                q = q & Q(motivo_saida__isnull=False)
+            else:
+                q = q & Q(motivo_saida=None)
+            return Animal.objects.filter(q)
+
+        return Animal.objects.filter(q, motivo_saida=None)
 
 
 class PropriedadeForm(forms.ModelForm):

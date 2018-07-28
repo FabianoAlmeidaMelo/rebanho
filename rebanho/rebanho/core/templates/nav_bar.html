@@ -19,8 +19,9 @@
           <li class="dropdown {{ menu_rebanho }}">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Rebanho<span class="caret"></span></a>
               <ul class="dropdown-menu">
-                {% for q in user.get_propriedades %}
+                {% for propriedade in user.get_propriedades %}
                   <li><a href="" title="{{ section.name }}">{{ q.nome }}</a></li>
+                  <li><a href="{% url 'animais_list' propriedade.id %}{{ get_ }}" title="{{ section.name }}">{{ propriedade.nome }}</a></li>
                 {% endfor %}
               </ul>
             </li>

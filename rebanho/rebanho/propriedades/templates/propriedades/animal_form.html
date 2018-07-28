@@ -1,0 +1,49 @@
+
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block page_title %}
+  <div class="page-header">
+    <br>
+    {% if animal%}
+      Edição, brinco <small>{{ animal.brinco }}</small>
+    {% else %}
+      Cadastro
+    {% endif %}de animal <small>Propriedade {{ propriedade }}: {{ propriedade.cnpj }}</small>
+
+  </div>
+{% endblock page_title %}
+
+{% block content %}
+<div class="container">
+  
+  <div class="row-fluid span10">
+    <form method="POST">
+      {% csrf_token %}
+      <div class="form-group center_div" >
+        <div class="row">
+          <div class="col-xs-9 col-sm-6 col-md-3">
+            {% bootstrap_field form.brinco %}
+            {% bootstrap_field form.sexo %}
+          </div>
+          <div class="col-xs-9 col-sm-6 col-md-3">
+              {% bootstrap_field form.nascimento %}
+              {% bootstrap_field form.entrada %}
+          </div>
+          <div class="col-xs-9 col-sm-6 col-md-3">
+              {% bootstrap_field form.saida %}
+              {% bootstrap_field form.motivo_saida %}
+          </div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <input type="submit" value="Salvar" class="btn btn-primary">
+        <a href="{% url 'animais_list' propriedade.pk %}" class="btn btn-secondary">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock content %}
+{% block extra_js %}
+  {{ form.media }}
+{% endblock extra_js %}
