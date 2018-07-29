@@ -136,6 +136,7 @@ class AnimalPesagem(models.Model):
     class Meta:
         verbose_name = 'pesagem'
         verbose_name_plural = 'pesagens'
+        ordering = ('-data',)
 
     def __str__(self):
         return '%s - %s - %s' % (self.animal.brinco, self.data, self.peso)

@@ -49,6 +49,7 @@
         <th>Última pesagem</th>
         <th>Peso</th>
         <th>Data / status</th>
+        <th>pesagem</th>
       </tr>
     </thead>
     <tbody>
@@ -65,7 +66,18 @@
         <td>{{ animal.get_ultima_pesagem.data|date:"d/m/Y"|default:"--" }}</td>
         <td>{{ animal.get_ultima_pesagem.peso|default:"--" }}</td>
         <td>{{ animal.get_data_status.0|date:"d/m/Y"|default:"--" }} <b>{{ animal.get_data_status.1 }}</b></td>
-      </tr>
+      
+      <td>
+        {% if 1 > 0 %}
+          <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#animal_{{ animal.id }}">@ - Kg</button>
+        {% endif %}
+      </td>
+      {% if 1 > 0 %}
+        <tr>
+          <!-- Modal -->
+          {% include "propriedades/pesagem_modal.html" %}
+        </tr>
+      {% endif %}
       {% empty %}
       <tr>
         <td>
