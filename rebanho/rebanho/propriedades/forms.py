@@ -25,7 +25,7 @@ class AnimalPesagemForm(forms.ModelForm):
                           required=True,
                           initial = timezone.now(),
                           widget=DateTimePicker(options={"format": "DD/MM/YYYY", "pickTime": False}))
-    peso = forms.DecimalField(min_value=Decimal('0.01'), widget=forms.NumberInput(attrs={'placeholder': '000,000'}))
+    peso = forms.DecimalField(label="Peso kg",min_value=Decimal('0.01'), widget=forms.NumberInput(attrs={'placeholder': '000,000'}))
     class Meta:
         model = AnimalPesagem
         exclude = ('animal',)
