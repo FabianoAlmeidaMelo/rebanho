@@ -12,25 +12,26 @@
 {% block content %}
 <div class="container">
   <div class="row-fluid span10">
-    <form method="POST">
-      {% csrf_token %}
-      <div class="form-group center_div" >
-        <div class="row">
-          <div class="col-xs-9 col-sm-6 col-md-3">
-            {% bootstrap_field form.peso %}
-            {% bootstrap_field form.data %}
+    {% if not animal.saida %}
+      <form method="POST">
+        {% csrf_token %}
+        <div class="form-group center_div" >
+          <div class="row">
+            <div class="col-xs-9 col-sm-6 col-md-3">
+              {% bootstrap_field form.peso %}
+              {% bootstrap_field form.data %}
+            </div>
           </div>
         </div>
-      </div>
-      <div class="form-actions">
-        {% if not animal.saida %}
+        <div class="form-actions">
           <input type="submit" value="Salvar" class="btn btn-primary">
-        {% else %}
-          Animal fora do estoque
-        {% endif %}
-        <a href="{% url 'animais_list' propriedade.pk %}" class="btn btn-secondary">Cancelar</a>
-      </div>
-    </form>
+          <a href="{% url 'animais_list' propriedade.pk %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    {% else %}
+      <p>Animal fora do estoque</p>
+      <a href="{% url 'animais_list' propriedade.pk %}" class="btn btn-secondary">Voltar para listagerm</a>
+    {% endif %}
+      </form>
       <fieldset>
         <legend>Pesagens:</legend>
         <div class="row">
