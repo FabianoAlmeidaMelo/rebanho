@@ -3,23 +3,59 @@ from django import forms
 
 from django.db.models import Q
 from django.forms.utils import ErrorList
+from django.utils import timezone
 from localbr.formfields import BRCNPJField
 from rebanho.core.widgets import DateTimePicker
 from rebanho.propriedades.models import (
     CHOICE_SEXO,
     Animal,
+    AnimalPesagem,
     Propriedade,
     PropriedadeUser,
 )
+from decimal import Decimal
+
+
+class AnimalPesagemForm(forms.ModelForm):
+    '''
+    #11 Cadastro de Pesagens de Animais
+
+    '''
+    data =forms.DateField(label='Data',
+                          required=True,
+                          initial = timezone.now(),
+                          widget=DateTimePicker(options={"format": "DD/MM/YYYY", "pickTime": False}))
+    peso = forms.DecimalField(min_value=Decimal('0.01'), widget=forms.NumberInput(attrs={'placeholder': '000,000'}))
+    class Meta:
+        model = AnimalPesagem
+        exclude = ('animal',)
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        self.animal = kwargs.pop('animal', None)
+        super(AnimalPesagemForm, self).__init__(*args, **kwargs)
+
+    def save(self, *args, **kwargs):
+        self.instance.animal = self.animal
+        instance = super(AnimalPesagemForm, self).save(*args, **kwargs)
+        instance.save()
+
+        return instance
 
 
 class AnimalForm(forms.ModelForm):
     '''
     #8 Cadastro e Edição de Animais
     '''
-    nascimento =forms.DateField(label='Nascimento', required=False, widget=DateTimePicker(options={"format": "DD/MM/YYYY", "pickTime": False}))
-    entrada =forms.DateField(label='Entrada no estoque', required=False, widget=DateTimePicker(options={"format": "DD/MM/YYYY", "pickTime": False}))
-    saida =forms.DateField(label='Sída do estoque', required=False, widget=DateTimePicker(options={"format": "DD/MM/YYYY", "pickTime": False}))
+    nascimento =forms.DateField(label='Nascimento',
+                                required=False,
+                                widget=DateTimePicker(options={"format": "DD/MM/YYYY", "pickTime": False}))
+    entrada =forms.DateField(label='Entrada no estoque',
+                             required=False,
+                             widget=DateTimePicker(options={"format": "DD/MM/YYYY", "pickTime": False}))
+    saida =forms.DateField(label='Sída do estoque',
+                           required=False,
+                           widget=DateTimePicker(options={"format": "DD/MM/YYYY", "pickTime": False}))
 
     class Meta:
         model = Animal

@@ -4,34 +4,21 @@
 {% block page_title %}
   <div class="page-header">
     <br>
-    {% if animal%}
-      Edição: brinco <small>{{ animal.brinco }}</small>,
-    {% else %}
-      Cadastro:
-    {% endif %} animal / <small>Propriedade {{ propriedade }}: {{ propriedade.cnpj }}</small>
-
-  </div>
+      Pesagem animal brinco <small>{{ animal.brinco }}</small>,
+      / <small>Propriedade {{ propriedade }}: {{ propriedade.cnpj }}</small>
+    </div>
 {% endblock page_title %}
 
 {% block content %}
 <div class="container">
-  
   <div class="row-fluid span10">
     <form method="POST">
       {% csrf_token %}
       <div class="form-group center_div" >
         <div class="row">
           <div class="col-xs-9 col-sm-6 col-md-3">
-            {% bootstrap_field form.brinco %}
-            {% bootstrap_field form.sexo %}
-          </div>
-          <div class="col-xs-9 col-sm-6 col-md-3">
-            {% bootstrap_field form.nascimento %}
-            {% bootstrap_field form.entrada %}
-          </div>
-          <div class="col-xs-9 col-sm-6 col-md-3">
-            {% bootstrap_field form.saida %}
-            {% bootstrap_field form.motivo_saida %}
+            {% bootstrap_field form.peso %}
+            {% bootstrap_field form.data %}
           </div>
         </div>
       </div>
@@ -40,6 +27,20 @@
         <a href="{% url 'animais_list' propriedade.pk %}" class="btn btn-secondary">Cancelar</a>
       </div>
     </form>
+      <fieldset>
+        <legend>Pesagens:</legend>
+        <div class="row">
+          <div class="col-xs-9 col-sm-6 col-md-3">
+            {% if animal.animalpesagem_set.count %}
+              {% for pesagem in animal.animalpesagem_set.all %}
+                <li>{{ pesagem.peso }} kg em: {{ pesagem.data|date:"d/m/Y" }}</li>
+              {% endfor%}
+            {% else %}
+              Esse animal ainda não foi pesado
+            {% endif %}
+          </div>
+        </div>
+      </fieldset>
   </div>
 </div>
 {% endblock content %}

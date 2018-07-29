@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 
+from decimal import Decimal
 
 CHOICE_MOTIVO_SAIDA = (
         (None, '---'),
@@ -99,7 +100,6 @@ class Animal(models.Model):
         retorna True or False
         """
         return self.propriedade_id in user.propriedadeuser_set.all().values_list('propriedade__id', flat=True)
-
 
     def get_ultima_pesagem(self):
         """

@@ -68,16 +68,10 @@
         <td>{{ animal.get_data_status.0|date:"d/m/Y"|default:"--" }} <b>{{ animal.get_data_status.1 }}</b></td>
       
       <td>
-        {% if 1 > 0 %}
-          <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#animal_{{ animal.id }}">@ - Kg</button>
+        {% if not animal.saida %}
+          <a href="{% url 'animal_pesagem_form' animal.id %}" class="btn btn-mini btn-success">@ - Kg</a>
         {% endif %}
       </td>
-      {% if 1 > 0 %}
-        <tr>
-          <!-- Modal -->
-          {% include "propriedades/pesagem_modal.html" %}
-        </tr>
-      {% endif %}
       {% empty %}
       <tr>
         <td>
@@ -91,6 +85,7 @@
 </div>
 {% endblock content %}
 {% block extra_js %}
+  <!-- Esconde e mostra o menu opcional: -->
   <script type="text/javascript">
       jQuery(document).ready( function() {
         /*
