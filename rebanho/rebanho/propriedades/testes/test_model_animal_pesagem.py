@@ -2,7 +2,6 @@ from decimal import Decimal
 from django.test import TestCase
 from django.shortcuts import resolve_url
 from django.utils import timezone
-import pytz
 
 from rebanho.propriedades.models import Animal, AnimalPesagem, Propriedade
 
@@ -32,7 +31,7 @@ class UserModelTest(TestCase):
         self.assertTrue(self.pesagem.id)
 
     def test_str(self):
-        self.assertEqual('A123456 - 2018-07-28 11:24:20.104074 - 430.450', str(self.pesagem))
+        self.assertEqual('A123456 - 2018-07-28 - 430.450', str(self.pesagem))
 
     def test_animal_required(self):
         # required

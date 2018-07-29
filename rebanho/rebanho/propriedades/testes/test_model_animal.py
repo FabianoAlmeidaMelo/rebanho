@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.shortcuts import resolve_url
 from django.utils import timezone
-import pytz
+
 from rebanho.core.models import User
 from rebanho.propriedades.models import (
     Animal,
@@ -92,7 +92,7 @@ class UserModelTest(TestCase):
                                                        data=data_2,
                                                        peso="470.348")
 
-        self.assertEqual("2018-07-28 03:30:20.104074+00:00", str(self.animal.get_ultima_pesagem().data))
+        self.assertEqual("2018-07-28", str(self.animal.get_ultima_pesagem().data.date()))
 
     def test_get_data_status(self):
         """

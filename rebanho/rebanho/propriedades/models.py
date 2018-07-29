@@ -139,4 +139,4 @@ class AnimalPesagem(models.Model):
         ordering = ('-data',)
 
     def __str__(self):
-        return '%s - %s - %s' % (self.animal.brinco, self.data, self.peso)
+        return '%s - %s - %s' % (self.animal.brinco, self.data.date(), self.peso)
