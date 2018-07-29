@@ -1,6 +1,8 @@
 from decimal import Decimal
 from django.test import TestCase
 from django.shortcuts import resolve_url
+from django.utils import timezone
+import pytz
 
 from rebanho.propriedades.models import Animal, AnimalPesagem, Propriedade
 
@@ -20,17 +22,17 @@ class UserModelTest(TestCase):
         self.animal = Animal.objects.create(propriedade=self.propriedade,
                                             sexo=1,
                                             brinco = 'A123456')
-
+        self.data = timezone.datetime(2018, 7, 28, 11, 24, 20, 104074)
         self.pesagem = AnimalPesagem.objects.create(animal=self.animal,
-                                                    data='2018-07-28 11:24', # AAAA-MM-DD HH: MM
-                                                    peso= Decimal('580.450'))
+                                                    data=self.data,
+                                                    peso= Decimal('430.450'))
 
     def test_create(self):
         "verifca se tem um ID"
         self.assertTrue(self.pesagem.id)
 
     def test_str(self):
-        self.assertEqual('A123456 - 2018-07-28 11:24 - 580.450', str(self.pesagem))
+        self.assertEqual('A123456 - 2018-07-28 11:24:20.104074 - 430.450', str(self.pesagem))
 
     def test_animal_required(self):
         # required

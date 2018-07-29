@@ -1,5 +1,7 @@
 from django.test import TestCase
 from django.shortcuts import resolve_url
+from django.utils import timezone
+import pytz
 from rebanho.core.models import User
 from rebanho.propriedades.models import (
     Animal,
@@ -81,24 +83,26 @@ class UserModelTest(TestCase):
         """
         retorna a pesagem mais recente
         """
+        data_1 = timezone.datetime(2018, 3, 28, 0, 30, 20, 104074)
+        data_2 = timezone.datetime(2018, 7, 28, 0, 30, 20, 104074)
         pesagem_primeira = AnimalPesagem.objects.create(animal=self.animal,
-                                                        data="2018-03-28T20:16:29.233Z",
+                                                        data=data_1,
                                                         peso="430.348")
         pesagem_segunda = AnimalPesagem.objects.create(animal=self.animal,
-                                                       data="2018-07-28T20:17:11.233Z",
+                                                       data=data_2,
                                                        peso="470.348")
 
-        self.assertEqual("2018-07-28 20:17:11.233000+00:00", str(self.animal.get_ultima_pesagem().data))
+        self.assertEqual("2018-07-28 03:30:20.104074+00:00", str(self.animal.get_ultima_pesagem().data))
 
-    # def test_get_data_status(self):
-    #             """
-    #     TODO: teste
-    #     test_get_ultima_pesagem
-    #     retorna a Data da pesagem mais recente
-    #     ou None
-    #     """
-    #     get_data_status = self.animal.get_data_status()
-    #     data = str(get_data_status[0])
-    #     status = get_data_status[1]
-    #     self.assertEqual("None", data)
-    #     self.assertEqual("", status)
+    def test_get_data_status(self):
+        """
+        TODO: teste
+        test_get_ultima_pesagem
+        retorna a Data da pesagem mais recente
+        ou None
+        """
+        get_data_status = self.animal.get_data_status()
+        data = str(get_data_status[0])
+        status = get_data_status[1]
+        self.assertEqual("None", data)
+        self.assertEqual("", status)
