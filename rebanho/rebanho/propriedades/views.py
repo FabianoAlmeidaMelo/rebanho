@@ -10,8 +10,9 @@ from rebanho.propriedades.forms import (
     AnimalSearchForm,
     PropriedadeForm,
     PropriedadeSearchForm,
+    AnimalPesagemForm,
 )
-from rebanho.propriedades.models import Animal, Propriedade
+from rebanho.propriedades.models import Animal, AnimalPesagem, Propriedade
 
 
 def animais_list(request, propriedade_pk):
@@ -23,8 +24,9 @@ def animais_list(request, propriedade_pk):
     can_edit = propriedade.can_edit(user)
     if not can_edit:
         raise Http404
-    
+    pesagem = AnimalPesagem()
     form = AnimalSearchForm(request.GET or None, user=user, propriedade=propriedade)
+
     animais = form.get_result_queryset()
     context = {}
     context['propriedade'] = propriedade
@@ -74,6 +76,7 @@ def animal_form(request, propriedade_pk, animal_pk=None):
         raise Http404
 
     form = AnimalForm(request.POST or None, instance=animal, user=user, propriedade=propriedade)
+
     context = {}
     context['animal'] = animal
     context['form'] = form
@@ -90,6 +93,40 @@ def animal_form(request, propriedade_pk, animal_pk=None):
             return render(request, 'propriedades/animal_form.html', context)
         return redirect(reverse('animais_list', kwargs={"propriedade_pk": propriedade.id}))
     return render(request, 'propriedades/animal_form.html', context)
+
+
+@login_required
+def animal_pesagem_form(request, animal_pk):
+    """
+    ref #11 Cadastro de pesagens
+    """
+    user = request.user
+    animal = get_object_or_404(Animal, pk=animal_pk)
+    propriedade = animal.propriedade
+    can_edit = animal.can_edit(user)
+    if not can_edit:
+        raise Http404
+
+    msg = u'Pesagem adicionada. '
+    pesagem = None
+    form = AnimalPesagemForm(request.POST or None, instance=pesagem, user=user, animal=animal)
+
+    if request.method == 'POST':
+        if form.is_valid():
+            pesagem = form.save()
+            msg += " %s - peso: %s" % (animal.brinco, pesagem.peso)
+            messages.success(request, msg)
+        else:
+            messages.warning(request, 'Falha no cadastro da pesagem')
+            return render(request, 'propriedades/animal_pesagem_form.html', context)
+        return redirect(reverse('animais_list', kwargs={"propriedade_pk": propriedade.id}))
+
+    context = {}
+    context['animal'] = animal
+    context['propriedade'] = propriedade
+    context['form'] = form
+
+    return render(request, 'propriedades/animal_pesagem_form.html', context)
 
 
 @login_required

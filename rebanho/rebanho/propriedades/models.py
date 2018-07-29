@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 
+from decimal import Decimal
 
 CHOICE_MOTIVO_SAIDA = (
         (None, '---'),
@@ -100,7 +101,6 @@ class Animal(models.Model):
         """
         return self.propriedade_id in user.propriedadeuser_set.all().values_list('propriedade__id', flat=True)
 
-
     def get_ultima_pesagem(self):
         """
         retorna a pesagem mais recente
@@ -136,6 +136,7 @@ class AnimalPesagem(models.Model):
     class Meta:
         verbose_name = 'pesagem'
         verbose_name_plural = 'pesagens'
+        ordering = ('-data',)
 
     def __str__(self):
-        return '%s - %s - %s' % (self.animal.brinco, self.data, self.peso)
+        return '%s - %s - %s' % (self.animal.brinco, self.data.date(), self.peso)
