@@ -2,20 +2,37 @@
 # ### http://tecadmin.net/install-python-3-5-on-ubuntu/#
 # ## sudo apt-get install python3.5-dev
 
--e git://github.com/FabianoAlmeidaMelo/django-localbr.git@6aebd61b59e4ab419dae8ee6c4558f32c1a5d24c#egg=django_localbr
--e git://github.com/znc-sistemas/django-municipios.git@024d7af7642edf281ba44f5bb4e61de344d0deb9#egg=django_municipios
-Django==1.11.12
-Pillow==3.4.2
+backcall==0.1.0
 certifi==2018.4.16
 chardet==3.0.4
+decorator==4.3.0
 dj-static==0.0.6
+Django==1.11.12
 django-bootstrap3==9.0.0
+-e git://github.com/FabianoAlmeidaMelo/django-localbr.git@6aebd61b59e4ab419dae8ee6c4558f32c1a5d24c#egg=django_localbr
 django-localflavor==1.4.1
+-e git://github.com/znc-sistemas/django-municipios.git@024d7af7642edf281ba44f5bb4e61de344d0deb9#egg=django_municipios
 django-test-without-migrations==0.6
+djangorestframework==3.8.2
+httpie==0.9.9
 idna==2.6
+ipython==6.2.1
+ipython-genutils==0.2.0
+jedi==0.12.1
+parso==0.3.1
+pexpect==4.6.0
+pickleshare==0.7.4
+Pillow==3.4.2
+prompt-toolkit==1.0.15
 psycopg2==2.6.2
+ptyprocess==0.6.0
+Pygments==2.2.0
 python-decouple==3.0
 pytz==2018.5
 requests==2.18.4
+simplegeneric==0.8.1
+six==1.11.0
 static3==0.7.0
+traitlets==4.3.2
 urllib3==1.22
+wcwidth==0.1.7

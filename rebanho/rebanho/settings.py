@@ -39,21 +39,29 @@ DEFAULT_FROM_EMAIL = u'contato@rebanho.com'
 
 
 # Application definition
-
-INSTALLED_APPS = [
+DEFAULT_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+]
+
+THIRD_PARTY_APPS = [
+    'rest_framework',
     'bootstrap3',
     'test_without_migrations',
     'localbr',
     'municipios',
+]
+
+LOCAL_APPS = [
     'rebanho.core',
     'rebanho.propriedades'
 ]
+
+INSTALLED_APPS = LOCAL_APPS + THIRD_PARTY_APPS + DEFAULT_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
