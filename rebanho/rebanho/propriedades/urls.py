@@ -1,5 +1,6 @@
 # coding: utf-8
 from django.conf.urls import include, url
+from rest_framework import routers
 
 from rebanho.propriedades.views import (
     animal_form,
@@ -7,9 +8,14 @@ from rebanho.propriedades.views import (
     animal_pesagem_form,
     propriedade_form,
     propriedades_list,
+    # REST:
+    pesagens_list, 
 )
 
 urlpatterns = [
+    # ## REST
+    url(r'^api-pesagens/$', pesagens_list),
+    # ## django
     # Animais
     url(r'^jetbov/animal_form/(?P<propriedade_pk>\d+)/$', animal_form, name='animal_form'),
     url(r'^jetbov/animal_form/(?P<propriedade_pk>\d+)/(?P<animal_pk>\d+)/$',animal_form, name='animal_form'),

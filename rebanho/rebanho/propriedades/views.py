@@ -14,7 +14,28 @@ from rebanho.propriedades.forms import (
 )
 from rebanho.propriedades.models import Animal, AnimalPesagem, Propriedade
 
+#### REST
+from rest_framework import viewsets
+from rebanho.propriedades.serializers import AnimalPesagemSerializer
+from django.http import HttpResponse, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
 
+
+@csrf_exempt
+def pesagens_list(request):
+    """
+    ref #14
+    Lista todas pesagens. 1ºs testes, sem filtra pelo CNPJ, por enquanto
+    """
+    if request.method == 'GET':
+        pesagens = AnimalPesagem.objects.all().order_by('-data')
+        serializer = AnimalPesagemSerializer(pesagens, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+
+@login_required
 def animais_list(request, propriedade_pk):
     """
     ref #8 Listagem de animais
@@ -54,7 +75,7 @@ def animais_list(request, propriedade_pk):
 
     return render(request, 'propriedades/animais_list.html', context)
 
-
+@login_required
 def animal_form(request, propriedade_pk, animal_pk=None):
     """
     ref #8 Cadastro e edição de animais
