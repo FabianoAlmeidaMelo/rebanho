@@ -153,6 +153,62 @@
     }
 },
 {
+    "model": "propriedades.animal",
+    "pk": 8,
+    "fields": {
+        "propriedade": 2,
+        "sexo": 1,
+        "brinco": "FSB868",
+        "nascimento": null,
+        "entrada": "2016-07-30T03:00:00Z",
+        "saida": null,
+        "motivo_saida": null,
+        "date_joined": "2018-07-30T03:19:54.110Z"
+    }
+},
+{
+    "model": "propriedades.animal",
+    "pk": 9,
+    "fields": {
+        "propriedade": 2,
+        "sexo": 1,
+        "brinco": "FSB97897",
+        "nascimento": null,
+        "entrada": "2016-07-30T03:00:00Z",
+        "saida": null,
+        "motivo_saida": null,
+        "date_joined": "2018-07-30T03:20:16.877Z"
+    }
+},
+{
+    "model": "propriedades.animal",
+    "pk": 10,
+    "fields": {
+        "propriedade": 2,
+        "sexo": 2,
+        "brinco": "FSB8965",
+        "nascimento": null,
+        "entrada": "2018-07-30T03:00:00Z",
+        "saida": null,
+        "motivo_saida": null,
+        "date_joined": "2018-07-30T03:20:41.501Z"
+    }
+},
+{
+    "model": "propriedades.animal",
+    "pk": 11,
+    "fields": {
+        "propriedade": 2,
+        "sexo": 2,
+        "brinco": "FSB2345",
+        "nascimento": null,
+        "entrada": "2016-07-30T03:00:00Z",
+        "saida": null,
+        "motivo_saida": null,
+        "date_joined": "2018-07-30T03:21:01.692Z"
+    }
+},
+{
     "model": "propriedades.animalpesagem",
     "pk": 1,
     "fields": {
@@ -204,6 +260,141 @@
         "animal": 2,
         "data": "2018-07-28T20:19:29.233Z",
         "peso": "429.343"
+    }
+},
+{
+    "model": "propriedades.animalpesagem",
+    "pk": 9,
+    "fields": {
+        "animal": 3,
+        "data": "2018-07-29T03:00:00Z",
+        "peso": "469.853"
+    }
+},
+{
+    "model": "propriedades.animalpesagem",
+    "pk": 10,
+    "fields": {
+        "animal": 1,
+        "data": "2018-07-29T03:00:00Z",
+        "peso": "469.589"
+    }
+},
+{
+    "model": "propriedades.animalpesagem",
+    "pk": 11,
+    "fields": {
+        "animal": 5,
+        "data": "2018-07-29T03:00:00Z",
+        "peso": "456.500"
+    }
+},
+{
+    "model": "propriedades.animalpesagem",
+    "pk": 12,
+    "fields": {
+        "animal": 7,
+        "data": "2017-07-30T03:00:00Z",
+        "peso": "380.000"
+    }
+},
+{
+    "model": "propriedades.animalpesagem",
+    "pk": 13,
+    "fields": {
+        "animal": 7,
+        "data": "2018-07-30T03:00:00Z",
+        "peso": "480.500"
+    }
+},
+{
+    "model": "propriedades.animalpesagem",
+    "pk": 14,
+    "fields": {
+        "animal": 6,
+        "data": "2017-07-30T03:00:00Z",
+        "peso": "360.600"
+    }
+},
+{
+    "model": "propriedades.animalpesagem",
+    "pk": 15,
+    "fields": {
+        "animal": 6,
+        "data": "2018-07-30T03:00:00Z",
+        "peso": "478.000"
+    }
+},
+{
+    "model": "propriedades.animalpesagem",
+    "pk": 16,
+    "fields": {
+        "animal": 11,
+        "data": "2016-07-30T03:00:00Z",
+        "peso": "360.000"
+    }
+},
+{
+    "model": "propriedades.animalpesagem",
+    "pk": 17,
+    "fields": {
+        "animal": 11,
+        "data": "2017-07-30T03:00:00Z",
+        "peso": "400.000"
+    }
+},
+{
+    "model": "propriedades.animalpesagem",
+    "pk": 18,
+    "fields": {
+        "animal": 8,
+        "data": "2016-07-30T03:00:00Z",
+        "peso": "354.000"
+    }
+},
+{
+    "model": "propriedades.animalpesagem",
+    "pk": 19,
+    "fields": {
+        "animal": 8,
+        "data": "2017-07-30T03:00:00Z",
+        "peso": "398.000"
+    }
+},
+{
+    "model": "propriedades.animalpesagem",
+    "pk": 20,
+    "fields": {
+        "animal": 10,
+        "data": "2016-07-30T03:00:00Z",
+        "peso": "320.000"
+    }
+},
+{
+    "model": "propriedades.animalpesagem",
+    "pk": 21,
+    "fields": {
+        "animal": 10,
+        "data": "2017-07-30T03:00:00Z",
+        "peso": "364.000"
+    }
+},
+{
+    "model": "propriedades.animalpesagem",
+    "pk": 22,
+    "fields": {
+        "animal": 9,
+        "data": "2016-07-30T03:00:00Z",
+        "peso": "355.560"
+    }
+},
+{
+    "model": "propriedades.animalpesagem",
+    "pk": 23,
+    "fields": {
+        "animal": 9,
+        "data": "2017-07-30T03:00:00Z",
+        "peso": "398.900"
     }
 }
 ]

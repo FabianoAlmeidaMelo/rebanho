@@ -40,6 +40,22 @@
         <a href="{% url 'animais_list' propriedade.pk %}" class="btn btn-secondary">Cancelar</a>
       </div>
     </form>
+    {% if animal %}
+      <fieldset>
+        <legend>Pesagens:</legend>
+        <div class="row">
+          <div class="col-xs-9 col-sm-6 col-md-3">
+            {% if animal.animalpesagem_set.count %}
+              {% for pesagem in animal.animalpesagem_set.all %}
+                <li>{{ pesagem.peso }} kg em: {{ pesagem.data|date:"d/m/Y" }}</li>
+              {% endfor%}
+            {% else %}
+              Esse animal ainda não foi pesado
+            {% endif %}
+          </div>
+        </div>
+      </fieldset>
+    {% endif %}
   </div>
 </div>
 {% endblock content %}
