@@ -14,7 +14,7 @@ from rebanho.propriedades.views import (
 
 urlpatterns = [
     # ## REST
-    url(r'^api-pesagens/$', pesagens_list),
+    url(r'^api-pesagens/(?P<cnpj>\d+)/$', pesagens_list),
     # ## django
     # Animais
     url(r'^jetbov/animal_form/(?P<propriedade_pk>\d+)/$', animal_form, name='animal_form'),
