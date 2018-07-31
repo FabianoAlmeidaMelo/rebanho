@@ -4,7 +4,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from django.shortcuts import render, redirect, get_object_or_404, resolve_url
-
+from django.http import Http404
 from rebanho.core.forms import (
     UserForm,
     UserSearchForm,
@@ -27,7 +27,7 @@ def usuarios_list(request):
     user = request.user
     
     form = UserSearchForm(request.GET or None)
-    usuarios = form.get_result_queryset()
+    usuarios = form.get_result_queryset().filter(id=user.id)
     context = {}
     can_edit = True 
     usuarios = usuarios.order_by('nome')
