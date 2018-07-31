@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from rebanho.propriedades.models import AnimalPesagem
 from rest_framework import serializers
 
