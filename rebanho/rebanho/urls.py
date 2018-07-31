@@ -23,6 +23,7 @@ from rebanho.core.forms import AuthenticationForm
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^', include('rebanho.api.urls')),
     url(r'^', include('rebanho.core.urls')),
     url(r'^', include('rebanho.propriedades.urls')),
     # Login Logout

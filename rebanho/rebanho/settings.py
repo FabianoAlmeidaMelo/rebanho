@@ -57,8 +57,9 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
+    'rebanho.api',
     'rebanho.core',
-    'rebanho.propriedades'
+    'rebanho.propriedades',
 ]
 
 INSTALLED_APPS = LOCAL_APPS + THIRD_PARTY_APPS + DEFAULT_APPS
