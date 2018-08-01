@@ -3,13 +3,100 @@
         "model": "core.user",
         "pk": 1,
         "fields": {
-            "password": "pbkdf2_sha256$36000$dO0W6lVDv7lt$NDtbYCgZsLcKT8f6Wq2XNG3yg8BopIDTV8zYIbaxZkY=",
-            "last_login": null,
+            "password": "pbkdf2_sha256$36000$wdSQTFONZv9B$i6IfyGyarRqvg6g031v/ddeaccM9otNbSutAEZo+l6w=",
+            "last_login": "2018-08-01T02:59:44.730Z",
+            "is_superuser": false,
             "email": "falmeidamelo@uol.com.br",
             "username": "falmeidamelo@uol.com.br",
             "nome": "Fabiano Almeida",
             "is_active": true,
-            "date_joined": "2018-07-26T03:17:54.732Z"
+            "is_staff": false,
+            "date_joined": "2018-07-26T03:17:54.732Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "core.user",
+        "pk": 2,
+        "fields": {
+            "password": "pbkdf2_sha256$36000$jSIw33N5AuTQ$tNbyhw5dQqVNW3+YRSILXsyH4ScP3GVHJyGc+yXwxVo=",
+            "last_login": "2018-07-30T23:35:24.788Z",
+            "is_superuser": false,
+            "email": "fabianoalmeidasjc@gmail.com",
+            "username": "fabianoalmeidasjc@gmail.com",
+            "nome": "Fabiano Melo",
+            "is_active": true,
+            "is_staff": false,
+            "date_joined": "2018-07-27T01:28:01.259Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "core.user",
+        "pk": 3,
+        "fields": {
+            "password": "pbkdf2_sha256$36000$fRWE33XMsJJp$tQDvjh3BbClTHbxBLFeGxM6yeiHocI8RK+TYTGeOJXE=",
+            "last_login": "2018-07-30T23:55:04.287Z",
+            "is_superuser": false,
+            "email": "admin@rebanho.com",
+            "username": "admin",
+            "nome": "Admim Rebanho",
+            "is_active": true,
+            "is_staff": false,
+            "date_joined": "2018-07-30T22:59:31.646Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "core.user",
+        "pk": 4,
+        "fields": {
+            "password": "pbkdf2_sha256$36000$aGHlnqLd2VTB$7bIV56Rc1Qrksm1SkmXpyyGPQ5tIhPWXktrFU0e6teY=",
+            "last_login": null,
+            "is_superuser": false,
+            "email": "novo@token.com",
+            "username": "novo@token.com",
+            "nome": "Novo com Token",
+            "is_active": true,
+            "is_staff": false,
+            "date_joined": "2018-07-31T00:29:41.856Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "authtoken.token",
+        "pk": "04d6f09894d03d6268e69240a597ba3ad9f7e1a0",
+        "fields": {
+            "user": 2,
+            "created": "2018-07-31T00:24:05.868Z"
+        }
+    },
+    {
+        "model": "authtoken.token",
+        "pk": "30e7359dfb5f54b74c6f46fa02af277bd217aff2",
+        "fields": {
+            "user": 3,
+            "created": "2018-07-31T00:24:05.938Z"
+        }
+    },
+    {
+        "model": "authtoken.token",
+        "pk": "3f15cf9ae7777197d0d2ed017b3d39f44fe34468",
+        "fields": {
+            "user": 1,
+            "created": "2018-07-31T00:24:05.994Z"
+        }
+    },
+    {
+        "model": "authtoken.token",
+        "pk": "e65ee4220ce616c2e3d2cafcc84c391d107f6493",
+        "fields": {
+            "user": 4,
+            "created": "2018-07-31T00:29:41.964Z"
         }
     }
 ]
