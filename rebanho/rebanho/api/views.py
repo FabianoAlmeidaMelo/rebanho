@@ -11,24 +11,6 @@ from rest_framework.parsers import JSONParser
 from rest_framework import serializers, generics
 
 
-class AnimalBrincoPesagemList(generics.ListAPIView):
-    """
-    ref #15
-    Consulta as pesagens de um Animal
-    passando o brinco e o Token
-    """
-    model = AnimalPesagem
-    serializer_class = AnimalPesagemSerializer
-    http_method_names = [u'get']
-
-
-    def get_queryset(self):
-        brinco = self.kwargs['brinco']
-        queryset = self.model.objects.filter(animal__brinco=brinco)
-
-        return queryset.order_by('-data')
-
-
 class AnimalCnpjPesagemList(generics.ListAPIView):
     """
     ref #14
@@ -42,8 +24,25 @@ class AnimalCnpjPesagemList(generics.ListAPIView):
     def get_queryset(self):
         cnpj = self.kwargs['cnpj']
         cnpj_valdate = BRCNPJField(always_return_formated=True)
-        cnpj_validado = cnpj_valdate.clean(cnpj)
+        try:
+            cnpj_validado = cnpj_valdate.clean(cnpj)
+        except:
+            cnpj_validado=None
         queryset = self.model.objects.filter(animal__propriedade__cnpj=cnpj_validado,
                                              animal__saida=None)
+
+        return queryset.order_by('-data')
+
+
+class AnimalBrincoPesagemList(AnimalCnpjPesagemList):
+    """
+    ref #15
+    Consulta as pesagens de um Animal
+    passando o brinco e o Token
+    """
+
+    def get_queryset(self):
+        brinco = self.kwargs['brinco']
+        queryset = self.model.objects.filter(animal__brinco=brinco)
 
         return queryset.order_by('-data')
