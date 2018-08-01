@@ -2,13 +2,12 @@
 from django.conf.urls import include, url
 # from rest_framework import routers
 
-from rebanho.api.views import (
-    AnimalPesagemList,
+from rebanho.api import views
 
-)
 
 urlpatterns = [
-    url(r'^api-pesagens_list/(?P<cnpj>\d+)/$', AnimalPesagemList.as_view()),
+    url(r'^api-brinco_pesagens_list/(?P<brinco>[\w\-]+)/$', views.AnimalBrincoPesagemList.as_view()),
+    url(r'^api-cnpj_pesagens_list/(?P<cnpj>\d+)/$', views.AnimalCnpjPesagemList.as_view()),
 ]
 
 
