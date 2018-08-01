@@ -23,3 +23,4 @@ urlpatterns = [
     url(r'^jetbov/animal_pesagem_form/(?P<animal_pk>\d+)/$', animal_pesagem_form, name='animal_pesagem_form'),
 
 ]
+

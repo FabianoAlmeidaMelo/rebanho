@@ -9,3 +9,4 @@ class AnimalPesagemSerializer(serializers.ModelSerializer):
         model = AnimalPesagem
         fields = ('id',  'animal', 'data', 'peso')
 
+

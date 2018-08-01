@@ -2,9 +2,11 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm as AuthAuthenticationForm
 from django.db.models import Q
+from django.forms.utils import ErrorList
 from rebanho.core.models import (
     User,
 )
+
 
 class AuthenticationForm(AuthAuthenticationForm):
     keep_me_logged_in = forms.BooleanField(
@@ -29,6 +31,12 @@ class UserForm(forms.ModelForm):
         self.user = kwargs.pop('user', None)
         super(UserForm, self).__init__(*args, **kwargs)
 
+    def clean(self):
+        cleaned_data = super(UserForm, self).clean()
+        if self.instance.pk and self.instance.pk != self.user.pk:
+            self.errors['nome'] = ErrorList(['Você não tem permissão para editar esse usuários'])
+       
+        return cleaned_data
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
