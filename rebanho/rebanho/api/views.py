@@ -9,7 +9,12 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from rest_framework import serializers, generics
-
+from rest_framework.authentication import (
+    SessionAuthentication,
+    BasicAuthentication,
+    TokenAuthentication,
+)
+from rest_framework.permissions import IsAuthenticated
 
 class AnimalCnpjPesagemList(generics.ListAPIView):
     """
@@ -19,7 +24,7 @@ class AnimalCnpjPesagemList(generics.ListAPIView):
     """
     model = AnimalPesagem
     serializer_class = AnimalPesagemSerializer
-    http_method_names = [u'get']
+    http_method_names = ['get']
 
     def get_queryset(self):
         cnpj = self.kwargs['cnpj']
@@ -34,12 +39,31 @@ class AnimalCnpjPesagemList(generics.ListAPIView):
         return queryset.order_by('-data')
 
 
-class AnimalBrincoPesagemList(AnimalCnpjPesagemList):
+class AnimalBrincoTokenPesagemList(AnimalCnpjPesagemList):
     """
     ref #15
     Consulta as pesagens de um Animal
     passando o brinco e o Token
     """
+    authentication_classes = (SessionAuthentication, BasicAuthentication, TokenAuthentication)
+    permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        brinco = self.kwargs['brinco']
+        queryset = self.model.objects.filter(animal__brinco=brinco)
+
+        return queryset.order_by('-data')
+
+
+class AnimalBrincoAuthPesagemList(AnimalCnpjPesagemList):
+    """
+    ref #
+    autenticacao será necessária:
+    Consulta as pesagens de um Animal
+    passando o brinco
+    """
+    authentication_classes = (SessionAuthentication, BasicAuthentication)
+    permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
         brinco = self.kwargs['brinco']
