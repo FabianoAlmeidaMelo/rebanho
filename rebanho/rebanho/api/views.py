@@ -8,28 +8,19 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
-from rest_framework import serializers
+from rest_framework import serializers, generics
 
 
-@csrf_exempt
-def pesagens_list(request, cnpj):
-    """
-    ref #14
-    Lista todas pesagens de uma Propriedade,
-    filtra pelo CNPJ:
-    exemplos:
-    browser:
-    http://localhost:8000/api-pesagens/61675372000102/
-    Terminal:
-    http http://localhost:8000/api-pesagens/61675372000102/
-    """
-    cnpj_valdate = BRCNPJField(always_return_formated=True)
-    try:
+class AnimalPesagemList(generics.ListAPIView):
+    model = AnimalPesagem
+    serializer_class = AnimalPesagemSerializer
+
+    def get_queryset(self):
+        cnpj = self.kwargs['cnpj']
+        cnpj_valdate = BRCNPJField(always_return_formated=True)
         cnpj_validado = cnpj_valdate.clean(cnpj)
-    except Exception as e:
-        raise serializers.ValidationError(str(e))
+        queryset = self.model.objects.filter(animal__propriedade__cnpj=cnpj_validado,
+                                             animal__saida=None)
 
-    if request.method == 'GET' and cnpj_validado:
-        pesagens = AnimalPesagem.objects.filter(animal__propriedade__cnpj=cnpj_validado).order_by('-data')
-        serializer = AnimalPesagemSerializer(pesagens, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        return queryset.order_by('-data')
+
