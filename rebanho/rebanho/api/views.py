@@ -12,6 +12,11 @@ from rest_framework import serializers, generics
 
 
 class AnimalPesagemList(generics.ListAPIView):
+    """
+    ref #14 consulta pesagens de Animais
+    que estão no estoque, passando apenas o CNPJ da
+    Fazenda
+    """
     model = AnimalPesagem
     serializer_class = AnimalPesagemSerializer
 
