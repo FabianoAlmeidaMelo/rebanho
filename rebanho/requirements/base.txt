@@ -7,7 +7,7 @@ certifi==2018.4.16
 chardet==3.0.4
 decorator==4.3.0
 dj-static==0.0.6
-Django==1.11.12
+Django==1.11.29
 django-bootstrap3==9.0.0
 -e git://github.com/FabianoAlmeidaMelo/django-localbr.git@6aebd61b59e4ab419dae8ee6c4558f32c1a5d24c#egg=django_localbr
 django-localflavor==1.4.1
